@@ -13,7 +13,6 @@ loadProducts('http://127.0.0.1:5500/js/data.json');
 
 // show all product in UI
 const showProducts = (products) => {
-   console.log(products)
    setInnerText('total_products', products.length);
 
    document.getElementById("all-products").innerHTML = "";
