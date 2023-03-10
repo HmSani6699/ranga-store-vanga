@@ -9,7 +9,7 @@ const loadProducts = (url) => {
         });
 };
 
-loadProducts('https://fakestoreapi.com/products');
+loadProducts('http://127.0.0.1:5500/js/data.json');
 
 // show all product in UI
 const showProducts = (products) => {
@@ -18,7 +18,7 @@ const showProducts = (products) => {
 
     document.getElementById("all-products").innerHTML = "";
 
-    const allProducts = products.slice(0, 10).map((pd) => pd);
+    const allProducts = products.map((pd) => pd);
     for (const product of allProducts) {
         const image = product.image;
         const div = document.createElement('div');
@@ -107,14 +107,14 @@ const updateTotal = () => {
         getInputValue('price') +
         getInputValue('delivery-charge') +
         getInputValue('total-tax');
-    document.getElementById('total').innerText = grandTotal;
+    document.getElementById('total').innerText = grandTotal.toFixed(2);
 };
 
 // search by category
 document.getElementById("search-btn").addEventListener("click", function () {
     const inputField = document.getElementById("input-value").value;
-    const searchedProduct = arr[0].find((p) =>
-        p.category.startsWith(`${inputField}`)
+    const searchedProduct = arr[0].filter((p) =>
+        p.title.includes(`${inputField}`)
     );
     showProducts(searchedProduct);
 });
