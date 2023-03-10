@@ -13,7 +13,7 @@ loadProducts('http://127.0.0.1:5500/js/data.json');
 
 // show all product in UI
 const showProducts = (products) => {
-
+   console.log(products)
    setInnerText('total_products', products.length);
 
    document.getElementById("all-products").innerHTML = "";
@@ -88,15 +88,15 @@ const updateTaxAndCharge = () => {
    const priceConverted = getInputValue('price');
    if (priceConverted > 500) {
       setInnerText('delivery-charge', 60);
-      setInnerText('total-tax', priceConverted * 0.4);
+      setInnerText('total-tax', (priceConverted * 0.4).toFixed(2));
    }
    else if (priceConverted > 400) {
       setInnerText('delivery-charge', 50);
-      setInnerText('total-tax', priceConverted * 0.3);
+      setInnerText('total-tax', (priceConverted * 0.3).toFixed(2));
    }
    else if (priceConverted > 200) {
       setInnerText('delivery-charge', 30);
-      setInnerText('total-tax', priceConverted * 0.2);
+      setInnerText('total-tax', (priceConverted * 0.2).toFixed(2));
    }
 };
 
@@ -112,8 +112,8 @@ const updateTotal = () => {
 // search by category
 document.getElementById("search-btn").addEventListener("click", function () {
    const inputField = document.getElementById("input-value").value;
-   const searchedProduct = arr[0].find((p) =>
-      p.category.startsWith(`${inputField}`)
+   const searchedProduct = arr[0].filter((p) =>
+      p.title.toLowerCase().startsWith(`${inputField.toLowerCase()}`)
    );
    showProducts(searchedProduct);
 });
